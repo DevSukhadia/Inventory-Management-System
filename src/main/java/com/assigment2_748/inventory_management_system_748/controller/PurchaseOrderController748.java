@@ -50,14 +50,14 @@ public class PurchaseOrderController748 {
 
     @PostMapping("/create")
     public ResponseEntity<List<Line748>> createPurchaseOrder748(@RequestBody Map<String, Object> request) {
-        System.out.println("In createPurchaseOrder748()");
-
         // Destruct the request
+        Integer poNo748 = objectMapper.convertValue(request.get("poNo"), new TypeReference<>() {});
         Integer clientId748 = objectMapper.convertValue(request.get("clientId"), new TypeReference<>() {});
         List<Map<String, Object>> partQuantityPairs = objectMapper.convertValue(request.get("partQuantityPairs"), new TypeReference<>() {});
         String status = objectMapper.convertValue(request.get("status"), new TypeReference<>() {});
 
-        if (partQuantityPairs.isEmpty() || clientId748 == null || clientId748 <= 0 || status == null || status.isEmpty()) {
+        if (partQuantityPairs.isEmpty() || clientId748 == null
+            || clientId748 <= 0 || status == null || status.isEmpty() || poNo748 == null || poNo748 <= 0) {
             System.out.println("Unexpected state of arguments.");
             ResponseEntity.badRequest().build();
         }
@@ -72,7 +72,8 @@ public class PurchaseOrderController748 {
         }
 
         Optional<List<Line748>> savedLines748;
-        savedLines748 = purchaseOrderService748.createPurchaseOrder(clientId748, status, parts748, partQuantities748);
+        savedLines748 = purchaseOrderService748.createPurchaseOrder(poNo748, clientId748, status, parts748,
+            partQuantities748);
 
         if (savedLines748.isEmpty()) {
             return ResponseEntity.internalServerError().build();

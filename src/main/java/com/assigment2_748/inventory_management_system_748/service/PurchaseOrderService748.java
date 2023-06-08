@@ -33,7 +33,7 @@ public class PurchaseOrderService748 {
         return Optional.of(purchaseOrderRepository748.findAll());
     }
 
-    public Optional<List<Line748>> createPurchaseOrder(Integer clientId, String status,
+    public Optional<List<Line748>> createPurchaseOrder(Integer poNo, Integer clientId, String status,
                                                        List<Part748> parts748, List<Integer> partQuantities748) {
         Optional<Client748> client748 = clientService748.findClientById(clientId);
 
@@ -42,6 +42,7 @@ public class PurchaseOrderService748 {
         }
 
         PurchaseOrder748 purchaseOrder748 = new PurchaseOrder748();
+        purchaseOrder748.setPo_no_748(poNo);
         purchaseOrder748.setStatus_748(status);
         purchaseOrder748.setDate_of_po_748(LocalDateTime.now());
         purchaseOrder748.setClient748(client748.get());

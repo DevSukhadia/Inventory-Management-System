@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "po_748")
 public class PurchaseOrder748 {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer po_no_748;
 
     private LocalDateTime date_of_po_748;
