@@ -24,4 +24,9 @@ public class PartController748 {
     public List<Part748> getAllParts748() {
         return partService748.getAllParts748().orElseGet(ArrayList::new);
     }
+
+    @GetMapping("/getPart")
+    public Part748 getAllParts748(@RequestParam Integer partNo748) {
+        return partService748.getPartById748(partNo748).orElse(null);
+    }
 }
